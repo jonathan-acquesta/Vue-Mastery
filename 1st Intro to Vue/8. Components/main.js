@@ -38,7 +38,7 @@ Vue.component('product', {
             </div>
             <div class="product-info">
                 <h1>{{ getTitle }}</h1>
-                <p v-if="hasEnoghStock">In Stock</p>
+                <p v-if="hasEnoughStock">In Stock</p>
                 <p v-else-if="hasMinStockLevel">Almost sold out!</p>
                 <p v-else class=outOfStock>Out of Stock</p>
                 <product-details :details="details"></product-details>
@@ -99,7 +99,7 @@ Vue.component('product', {
         }
     },
     computed: {
-        hasEnoghStock() {
+        hasEnoughStock() {
             return this.getInventory > 10;
         },
         hasMinStockLevel() {

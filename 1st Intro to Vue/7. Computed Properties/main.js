@@ -16,7 +16,7 @@ var app = new Vue({
         ]
     },
     computed: {
-        hasEnoghStock() {
+        hasEnoughStock() {
             return this.getInventory > 10;
         },
         hasMinStockLevel() {
