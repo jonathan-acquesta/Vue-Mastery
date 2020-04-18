@@ -148,6 +148,9 @@ var app = new Vue({
         premium: true,
         productsPerPage: 3
     },
+    created() {
+        document.title = "Vue Mastery - Intro to Vue - Components";
+    },
     computed: {
 
     },

@@ -21,6 +21,9 @@ var app = new Vue({
             return this.cart == 0;
         }
     },
+    created() {
+        document.title = "Vue Mastery - Intro to Vue - Class and Style Binding";
+    },
     methods: {
         addToCart() {
             if (this.inventory > 0) {

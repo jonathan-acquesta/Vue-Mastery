@@ -4,6 +4,81 @@ Vue.filter('money', function(value, ignore) {
     return "$ " + value.toFixed(2);
 });
 
+Vue.component('product-card-review', {
+    template: `
+    <form class="review-form" @submit.prevent="onSubmit">    
+        <p>Would you recommend this product?</p>
+        <input type="radio" id="yes" v-model="newReview.recommend" value="yes">Yes</input>
+        <input type="radio" id="no" v-model="newReview.recommend" value="no">No</input>
+        <p>
+            <label for="name">Name:</label>
+            <input id="name" v-model="newReview.name" placeholder="name">
+        </p>
+        
+        <p>
+            <label for="review">Review:</label>      
+            <textarea id="review" v-model="newReview.review"></textarea>
+        </p>
+        
+        <p>
+            <label for="rating">Rating:</label>
+            <select id="rating" v-model.number="newReview.rating">
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+            </select>
+        </p>
+            
+        <p>
+            <input type="submit" value="Submit">  
+        </p>    
+
+        <p v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
+        </p>
+    
+    </form>
+    `,
+    data() {
+        return {
+            newReview: {
+                name: null,
+                review: null,
+                rating: null,
+                recommend: null
+            },
+            emptyReview: {
+                name: null,
+                review: null,
+                rating: null,
+                recommend: null
+            },
+            errors: []
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.errors = [];
+
+            if (!this.newReview.recommend) { this.errors.push("Your opinion required."); }
+            if (!this.newReview.name) { this.errors.push("Name required."); }
+            if (!this.newReview.review) { this.errors.push("Review required."); }
+            if (!this.newReview.rating) { this.errors.push("Rating required."); }
+
+            if (this.errors.length == 0) {
+                this.$emit("post-review", this.newReview);
+
+                this.newReview = this.emptyReview;
+            }
+        }
+    }
+})
+
 Vue.component('product-card-details', {
     props: {
         details: {
@@ -56,20 +131,27 @@ Vue.component('product-card', {
                 </div>
                 <br />
                 <span>Sizes:</span>
-                
                     <label v-for="size in this.product.sizes">{{ size + " " }}</label>
-                
                 <div>
                     <button @click="addToCart" :disabled="emptyStock" :class="{ disabledButton: emptyStock}">Add to Cart</button>
                     <button @click="removeFromCart" :disabled="emptyCart" :class="{ disabledButton: emptyCart}">Remove from Cart</button>
                 </div>
+                <product-card-review @post-review="postReview"></product-card-review>
+                <div>
+                    <h2>Reviews</h2>
+                    <p v-if="reviews.length == 0" >There are no reviews yet.</p>
+                    <div v-else>
+                        <ul>
+                            <li v-for="item in reviews">{{ showReview(item) }}<p>{{ "Review: " + item.review }}</p></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     `,
     data() {
         return {
-
+            reviews: []
         }
     },
     methods: {
@@ -92,6 +174,16 @@ Vue.component('product-card', {
 
             ++variant.inventory;
             this.$emit('remove-from-cart', variant);
+        },
+        postReview(review) {
+            this.reviews.push(review);
+        },
+        showReview(review) {
+            if (review.recommend === "yes") {
+                return review.name + " recommended this product and rated it with " + review.rating + " stars";
+            } else {
+                return review.name + " did not recommend this product and rated it with " + review.rating + " stars";
+            }
         }
     },
     computed: {
@@ -164,7 +256,7 @@ var app = new Vue({
         cart: []
     },
     created() {
-        document.title = "Vue Mastery - Intro to Vue - Communication Events";
+        document.title = "Vue Mastery - Intro to Vue - Forms";
     },
     computed: {
         getTotalCart() {

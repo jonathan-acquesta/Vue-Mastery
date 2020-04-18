@@ -5,5 +5,8 @@ var app = new Vue({
         description: 'A pair of warm, fuzzy socks',
         link: 'http://www.jonathancacquesta.com.br',
         image: './assets/vmSocks-green-onWhite.jpg'
-    }
+    },
+    created() {
+        document.title = "Vue Mastery - Intro to Vue - Attribute Binding";
+    },
 })

@@ -11,5 +11,8 @@ var app = new Vue({
             { variantId: 1, variantColor: "green" },
             { variantId: 2, variantColor: "blue" }
         ]
-    }
+    },
+    created() {
+        document.title = "Vue Mastery - Intro to Vue - List Rendering";
+    },
 })

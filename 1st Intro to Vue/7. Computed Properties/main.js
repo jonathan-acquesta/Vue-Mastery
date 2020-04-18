@@ -15,6 +15,9 @@ var app = new Vue({
             { id: 2, color: "blue", image: './assets/vmSocks-blue-onWhite.jpg', inventory: 3, onSale: false }
         ]
     },
+    created() {
+        document.title = "Vue Mastery - Intro to Vue - Computed Properties";
+    },
     computed: {
         hasEnoughStock() {
             return this.getInventory > 10;

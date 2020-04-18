@@ -13,6 +13,9 @@ var app = new Vue({
             { id: 2, color: "blue", image: './assets/vmSocks-blue-onWhite.jpg' }
         ]
     },
+    created() {
+        document.title = "Vue Mastery - Intro to Vue - Event Handling";
+    },
     methods: {
         addToCart() {
             if (this.inventory > 0) {
