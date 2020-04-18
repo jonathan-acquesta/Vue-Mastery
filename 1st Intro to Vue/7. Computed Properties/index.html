@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Mastery - Attribute Binding</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="nav-bar"></div>
+    <div id="app">
+        <div class="product">
+            <div class="product-image">
+                <img :src="getImage">
+            </div>
+            <div class="product-info">
+                <h1>{{ getTitle }}</h1>
+                <p v-if="hasEnoghStock">In Stock</p>>
+                <p v-else-if="hasMinStockLevel">Almost sold out!</p>>
+                <p v-else class=outOfStock>Out of Stock</p>
+                <ul>
+                    <li v-for="detail in details">{{ detail }}</li>
+                </ul>
+                <span>Colors:</span>
+                <div v-for="variant in variants" :key="variant.id" class="color-box" :style="{ backgroundColor: variant.color }" @mouseover="updateProduct(variant)">
+                </div>
+                <br />
+                <span>Sizes:</span>
+                <ul>
+                    <li v-for="size in sizes">{{ size }}</li>
+                </ul>
+                <div>
+                    <button @click="addToCart" :disabled="hasStock" :class="{ disabledButton: hasStock}">Add to Cart</button>
+                </div>
+                <div>
+                    <button @click="removeFromCart" :disabled="emptyCart" :class="{ disabledButton: emptyCart}">Remove from Cart</button>
+                </div>
+                <div class="cart">
+                    <p>Cart({{getCartAllQuantity}})</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="main.js"></script>
+
+</html>
