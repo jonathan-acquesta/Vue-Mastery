@@ -5,7 +5,7 @@
 - Centralize interactions with the Vue Mastery platform
 
 ## Key-Result
-- Conclude Intro to Vue Course (1.0)![](https://github.com/jonathan-acquesta/Vue-Mastery/blob/master/ConcludeImage.jpg)
+- Conclude Intro to Vue Course ✔
 - Conclude Real World Vue Course
 - Conclude Mastering Vuex Course
 - Conclude Next-Level Vue Course
