@@ -5,7 +5,7 @@
 - Centralize interactions with the Vue Mastery platform
 
 ## Key-Result
-- Conclude Intro to Vue Course ✔
+- Conclude Intro to Vue Course ✔✓
 - Conclude Real World Vue Course
 - Conclude Mastering Vuex Course
 - Conclude Next-Level Vue Course
