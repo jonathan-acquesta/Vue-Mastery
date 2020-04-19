@@ -21,3 +21,5 @@
  <p align="center">
   <img src="https://github.com/jonathan-acquesta/Vue-Mastery/blob/master/1st%20Intro%20to%20Vue/badge.JPG">
 </p>
+
+![](https://github.com/jonathan-acquesta/Vue-Mastery/blob/master/1st%20Intro%20to%20Vue/Record.gif)
